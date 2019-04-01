@@ -1,0 +1,33 @@
+{
+    "companyCode": "{{ company }}",
+    "type": "SalesOrder",
+    "code": "{{ uuid }}",
+    "customerCode": "LoadTest",
+    "date": "{{ date "Mon Jan _2 15:04:05 MST 2006" }}",
+    "addresses": {
+        "ShipFrom": {
+            "line1": "{{ street }}",
+            "city": "{{ city }}",
+            "region": "{{ state }}",
+            "country": "US",
+            "postalCode": "{{ zipCode }}"
+        },
+        "ShipTo": {
+            "line1": "{{ street }}",
+            "city": "{{ city }}",
+            "region": "{{ state }}",
+            "country": "US",
+            "postalCode": "{{ zipCode }}"
+        }
+    },
+    "lines": [
+        {{- range $index, $value := weightedSequence }}
+        {
+            "number": "{{ add $index 1 }}",
+            "quantity": "{{ randomInt 50 }}",
+            "amount": "{{ randomInt 10000 }}",
+            "description": "{{ description }}"
+        },
+        {{- end }}
+    ]
+}
